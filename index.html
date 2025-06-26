@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de Uso de IA Generativa por Industria - Futuro</title>
+    <style>
+        /* Basic reset and body styling */
+        body {
+            font-family: 'Inter', sans-serif; /* Prefer Inter font */
+            margin: 0; /* Remove default margin */
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content horizontally */
+            min-height: 100vh; /* Full viewport height */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        /* Responsive heading */
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em; /* Larger on desktop */
+        }
+
+        /* Container for the mind map */
+        #mindmap-container {
+            width: 100%; /* Fluid width */
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        /* Styling for each industry node */
+        .mindmap-node {
+            margin-bottom: 15px; /* More space between nodes */
+        }
+
+        .industry-node {
+            cursor: pointer;
+            font-size: 1.4em; /* Slightly larger text */
+            font-weight: bold;
+            color: #3498db;
+            padding: 12px 20px; /* More padding */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #ecf0f1;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+
+        .industry-node:hover {
+            background-color: #dbe4e8;
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        .industry-node .toggle-icon {
+            margin-right: 12px; /* More space for icon */
+            font-size: 0.8em; /* Slightly smaller for balance */
+            transition: transform 0.3s ease;
+        }
+
+        .industry-node.expanded .toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        /* Examples list styling */
+        .examples-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            margin-left: 40px; /* More indent */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother animation curve */
+            position: relative;
+            background-color: #fdfdfd; /* Light background for examples list */
+            border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+            border-top: 1px solid #e0e0e0; /* Separator line */
+            padding-top: 10px; /* Padding inside list */
+        }
+
+        .examples-list.expanded {
+            max-height: 500px; /* Adjust based on expected content, should be generous */
+            transition: max-height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Individual example item styling */
+        .example-item {
+            font-size: 1.05em;
+            padding: 10px 15px;
+            margin: 5px 0; /* Vertical margin */
+            background-color: #f8f8f8;
+            border-left: 5px solid #95a5a6; /* Thicker border */
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-left-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
+        }
+
+        .example-item:hover {
+            background-color: #eaf5ff; /* Lighter blue on hover */
+            border-left-color: #2ecc71; /* Highlight on hover */
+            transform: translateX(5px); /* Slide right on hover */
+        }
+
+        .example-item strong {
+            color: #2c3e50;
+            margin-bottom: 5px; /* More space for description */
+            font-size: 1.1em;
+        }
+
+        .example-item span {
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Example details section */
+        #example-details {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e8f3f8;
+            border-left: 6px solid #3498db; /* Thicker border */
+            border-radius: 10px; /* More rounded */
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Shadow */
+        }
+
+        #example-details.visible {
+            display: block;
+            animation: fadeIn 0.5s forwards; /* Fade in animation */
+        }
+
+        #example-details h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c0d9e8;
+            padding-bottom: 10px;
+        }
+
+        #example-details h4 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        #example-details p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            #mindmap-container {
+                padding: 20px;
+                border-radius: 10px;
+            }
+            .industry-node {
+                font-size: 1.2em;
+                padding: 10px 15px;
+                border-radius: 6px;
+            }
+            .examples-list {
+                margin-left: 20px;
+            }
+            .example-item {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            #example-details {
+                padding: 15px;
+                margin-top: 30px;
+            }
+            #example-details h4 {
+                font-size: 1.1em;
+            }
+            #example-details p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Explora Casos de Uso de IA Generativa por Industria con Futuro</h1>
+
+    <div id="mindmap-container">
+        <div id="industries-list">
+            <!-- Industries will be loaded here by JavaScript -->
+        </div>
+
+        <div id="example-details">
+            <h3>Detalles del Ejemplo Seleccionado:</h3>
+            <h4 id="detail-title"></h4>
+            <p id="detail-description"></p>
+        </div>
+    </div>
+
+    <script>
+        // --- Data for your Mind Map ---
+        // IMPORTANT: Populate this array with real examples from the "601 real-world gen AI use cases" document.
+        // I've included a few placeholders.
+        const industryData = [
+            {
+                name: "Salud",
+                id: "salud",
+                examples: [
+                    { title: "Diagnóstico Asistido por IA", description: "Acelerar la detección de enfermedades con análisis avanzado de imágenes y datos, mejorando la precisión y velocidad para profesionales médicos, por ejemplo, identificando signos tempranos de cáncer a partir de escaneos médicos." },
+                    { title: "Planes de Tratamiento Personalizados", description: "Adaptar terapias y dosis de medicamentos basándose en datos individuales del paciente, genética y respuesta al tratamiento, lo que lleva a resultados más efectivos y seguros." },
+                    { title: "Aceleración del Descubrimiento de Fármacos", description: "Usar IA Generativa para identificar rápidamente posibles candidatos a fármacos, predecir su eficacia y simular interacciones moleculares, reduciendo drásticamente el tiempo de I+D para nuevos medicamentos." }
+                ]
+            },
+            {
+                name: "Comercio Minorista y E-commerce",
+                id: "comercio",
+                examples: [
+                    { title: "Recomendaciones de Productos Personalizadas", description: "La IA sugiere productos altamente relevantes a los clientes basándose en su historial de navegación, patrones de compra e interacciones en tiempo real, mejorando la experiencia de compra y las ventas." },
+                    { title: "Experiencias de Prueba Virtual", description: "Permitir a los clientes 'probarse' ropa, gafas o incluso muebles virtualmente en su propio espacio usando realidad aumentada e IA Generativa, reduciendo devoluciones y aumentando la satisfacción." },
+                    { title: "Soporte al Cliente Automatizado", description: "Chatbots y asistentes virtuales impulsados por IA que brindan soporte instantáneo, 24/7, respondiendo consultas y resolviendo problemas de manera eficiente, liberando a los agentes humanos para tareas complejas." }
+                ]
+            },
+            {
+                name: "Servicios Financieros",
+                id: "financieros",
+                examples: [
+                    { title: "Detección de Fraude Mejorada", description: "Identificar transacciones y patrones sospechosos en tiempo real con alta precisión, minimizando las pérdidas financieras debido al fraude y mejorando la seguridad para los clientes." },
+                    { title: "Asesoramiento Financiero Personalizado", description: "La IA Generativa asiste a los clientes con estrategias de inversión, presupuestos y planificación financiera adaptados a sus objetivos individuales y tolerancia al riesgo, haciendo la planificación financiera más accesible." },
+                    { title: "Generación Automatizada de Informes", description: "Generar automáticamente informes financieros complejos, análisis de mercado y documentos de cumplimiento, ahorrando tiempo y recursos significativos para las instituciones financieras." }
+                ]
+            },
+            {
+                name: "Manufactura",
+                id: "manufactura",
+                examples: [
+                    { title: "Mantenimiento Predictivo", description: "Anticipar fallos de equipos analizando datos de sensores y métricas de producción, lo que permite un mantenimiento proactivo, reduce el tiempo de inactividad y extiende la vida útil de los activos." },
+                    { title: "Diseño Generativo de Piezas", description: "La IA diseña autónomamente componentes y productos optimizados basándose en parámetros específicos (ej., fuerza, peso, costo), lo que lleva a diseños innovadores y más eficientes." },
+                    { title: "Optimización de la Cadena de Suministro", description: "Mejorar la logística, la gestión de inventario y la previsión de la demanda analizando grandes conjuntos de datos, lo que conduce a cadenas de suministro más eficientes, resilientes y rentables." }
+                ]
+            },
+            {
+                name: "Medios y Entretenimiento",
+                id: "medios",
+                examples: [
+                    { title: "Creación de Contenido Automatizada", description: "Generar guiones, tramas, música o incluso videoclips cortos usando IA Generativa, acelerando la producción de contenido y habilitando nuevas formas de medios." },
+                    { title: "Curación de Contenido Personalizada", description: "La IA recomienda películas, música o artículos basándose en las preferencias del usuario y el historial de visualización, mejorando el compromiso y el descubrimiento del usuario." },
+                    { title: "Producción de Medios Sintéticos", description: "Crear humanos digitales realistas, voces en off o entornos virtuales para películas, juegos y publicidad, abriendo nuevas posibilidades creativas." }
+                ]
+            },
+            {
+                name: "TI e Ingeniería",
+                id: "ti-ingenieria",
+                examples: [
+                    { title: "Generación y Completado de Código", description: "La IA asiste a los desarrolladores generando fragmentos de código, completando funciones y sugiriendo mejoras, acelerando significativamente el proceso de desarrollo." },
+                    { title: "Pruebas y Depuración Automatizadas", description: "Usar IA Generativa para crear casos de prueba, identificar errores e incluso sugerir correcciones en el software, lo que lleva a aplicaciones de mayor calidad y más confiables." },
+                    { title: "Monitoreo de Sistemas y Detección de Anomalías", description: "La IA analiza registros del sistema y datos de rendimiento para identificar proactivamente patrones inusuales o posibles problemas, previniendo interrupciones y mejorando la estabilidad del sistema." }
+                ]
+            },
+            {
+                name: "Educación",
+                id: "educacion",
+                examples: [
+                    { title: "Rutas de Aprendizaje Personalizadas", description: "La IA adapta el contenido educativo y el ritmo a las necesidades individuales de los estudiantes y estilos de aprendizaje, optimizando el compromiso y la retención de conocimientos." },
+                    { title: "Calificación y Retroalimentación Automatizadas", description: "La IA Generativa proporciona retroalimentación instantánea sobre las tareas e incluso califica ciertos tipos de trabajo, permitiendo a los educadores centrarse en tareas de enseñanza más complejas." },
+                    { title: "Generación de Contenido para Cursos", description: "Crear notas de clase, cuestionarios e incluso simulaciones interactivas basadas en los requisitos del plan de estudios, ahorrando tiempo a los desarrolladores de contenido." }
+                ]
+            }
+            // Agrega más industrias y sus ejemplos aquí.
+            // Recuerda usar un 'id' único para cada nueva industria.
+        ];
+
+        // --- JavaScript for Mind Map Functionality ---
+        const industriesList = document.getElementById('industries-list');
+        const detailSection = document.getElementById('example-details');
+        const detailTitle = document.getElementById('detail-title');
+        const detailDescription = document.getElementById('detail-description');
+
+        /**
+         * Renders the mind map by populating the industries list
+         * with data from the `industryData` array.
+         */
+        function renderMindMap() {
+            industriesList.innerHTML = ''; // Clear any existing content
+
+            // Iterate over each industry in the data
+            industryData.forEach(industry => {
+                // Create the main container for an industry node and its examples
+                const industryDiv = document.createElement('div');
+                industryDiv.classList.add('mindmap-node');
+
+                // Create the clickable industry title node
+                const industryNode = document.createElement('div');
+                industryNode.classList.add('industry-node');
+                industryNode.setAttribute('data-industry-id', industry.id);
+                // Add a toggle icon and the industry name
+                industryNode.innerHTML = `<span class="toggle-icon">></span> ${industry.name}`;
+
+                // Create the unordered list to hold the examples
+                const examplesList = document.createElement('ul');
+                examplesList.classList.add('examples-list');
+                examplesList.setAttribute('id', `examples-${industry.id}`);
+
+                // Populate the examples list for the current industry
+                industry.examples.forEach(example => {
+                    const exampleItem = document.createElement('li');
+                    exampleItem.classList.add('example-item');
+                    // Display title and a short snippet of the description
+                    exampleItem.innerHTML = `
+                        <strong>${example.title}</strong>
+                        <span>${example.description.substring(0, 100)}${example.description.length > 100 ? '...' : ''}</span>
+                    `;
+                    // Add an event listener to show full details when an example is clicked
+                    exampleItem.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Prevent toggling industry when clicking example
+                        showExampleDetails(example);
+                    });
+                    examplesList.appendChild(exampleItem);
+                });
+
+                // Add event listener to the industry title to toggle examples visibility
+                industryNode.addEventListener('click', () => toggleIndustry(industryNode, examplesList));
+
+                // Append the industry node and its examples list to the main industries container
+                industryDiv.appendChild(industryNode);
+                industryDiv.appendChild(examplesList);
+                industriesList.appendChild(industryDiv);
+            });
+        }
+
+        /**
+         * Toggles the visibility of an industry's examples list.
+         * @param {HTMLElement} industryNode - The clicked industry title element.
+         * @param {HTMLElement} examplesList - The examples list element to toggle.
+         */
+        function toggleIndustry(industryNode, examplesList) {
+            industryNode.classList.toggle('expanded');
+            examplesList.classList.toggle('expanded');
+            
+            // Set max-height for smooth transition. If expanded, set to scrollHeight
+            // (or a generous fixed value if scrollHeight is not immediately accurate).
+            // If collapsed, set to 0.
+            if (examplesList.classList.contains('expanded')) {
+                // A slight delay or a generous fixed value can help if content is loaded dynamically
+                examplesList.style.maxHeight = examplesList.scrollHeight + "px";
+                if (examplesList.scrollHeight === 0) { // Fallback for empty or very short lists
+                    examplesList.style.maxHeight = "200px"; // Ensure some height even if empty initially
+                }
+            } else {
+                examplesList.style.maxHeight = "0";
+            }
+            hideExampleDetails(); // Hide details when an industry is collapsed or opened
+        }
+
+        /**
+         * Displays the full details of a selected example.
+         * @param {Object} example - The example object containing title and description.
+         */
+        function showExampleDetails(example) {
+            detailTitle.textContent = example.title;
+            detailDescription.textContent = example.description;
+            detailSection.classList.add('visible');
+            // Scroll the details section into view smoothly
+            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        /**
+         * Hides the example details section.
+         */
+        function hideExampleDetails() {
+            detailSection.classList.remove('visible');
+            detailTitle.textContent = '';
+            detailDescription.textContent = '';
+        }
+
+        // Initialize the mind map when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', renderMindMap);
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+[
+    {
+        "name": "Salud",
+        "id": "salud",
+        "examples": [
+            { "title": "Diagnóstico Asistido por IA", "description": "Acelerar la detección de enfermedades con análisis avanzado de imágenes y datos, mejorando la precisión y velocidad para profesionales médicos, por ejemplo, identificando signos tempranos de cáncer a partir de escaneos médicos." },
+            { "title": "Planes de Tratamiento Personalizados", "description": "Adaptar terapias y dosis de medicamentos basándose en datos individuales del paciente, genética y respuesta al tratamiento, lo que lleva a resultados más efectivos y seguros." },
+            { "title": "Aceleración del Descubrimiento de Fármacos", "description": "Usar IA Generativa para identificar rápidamente posibles candidatos a fármacos, predecir su eficacia y simular interacciones moleculares, reduciendo drásticamente el tiempo de I+D para nuevos medicamentos." },
+            { "title": "Gestión de Registros Médicos", "description": "Automatizar la organización y resumen de grandes volúmenes de registros médicos, facilitando el acceso y la comprensión para el personal sanitario." },
+            { "title": "Asistentes Virtuales para Pacientes", "description": "Proporcionar información de salud, recordatorios de citas y soporte emocional a pacientes a través de interfaces conversacionales de IA." }
+        ]
+    },
+    {
+        "name": "Comercio Minorista y E-commerce",
+        "id": "comercio",
+        "examples": [
+            { "title": "Recomendaciones de Productos Personalizadas", "description": "La IA sugiere productos altamente relevantes a los clientes basándose en su historial de navegación, patrones de compra e interacciones en tiempo real, mejorando la experiencia de compra y las ventas." },
+            { "title": "Experiencias de Prueba Virtual", "description": "Permitir a los clientes 'probarse' ropa, gafas o incluso muebles virtualmente en su propio espacio usando realidad aumentada e IA Generativa, reduciendo devoluciones y aumentando la satisfacción." },
+            { "title": "Soporte al Cliente Automatizado", "description": "Chatbots y asistentes virtuales impulsados por IA que brindan soporte instantáneo, 24/7, respondiendo consultas y resolviendo problemas de manera eficiente, liberando a los agentes humanos para tareas complejas." },
+            { "title": "Optimización de Precios Dinámica", "description": "Ajustar los precios de los productos en tiempo real basándose en la demanda, la competencia y otros factores del mercado para maximizar los ingresos." },
+            { "title": "Generación de Descripciones de Productos", "description": "Crear automáticamente descripciones de productos atractivas y optimizadas para SEO a partir de especificaciones básicas." }
+        ]
+    },
+    {
+        "name": "Servicios Financieros",
+        "id": "financieros",
+        "examples": [
+            { "title": "Detección de Fraude Mejorada", "description": "Identificar transacciones y patrones sospechosos en tiempo real con alta precisión, minimizando las pérdidas financieras debido al fraude y mejorando la seguridad para los clientes." },
+            { "title": "Asesoramiento Financiero Personalizado", "description": "La IA Generativa asiste a los clientes con estrategias de inversión, presupuestos y planificación financiera adaptados a sus objetivos individuales y tolerancia al riesgo, haciendo la planificación financiera más accesible." },
+            { "title": "Generación Automatizada de Informes", "description": "Generar automáticamente informes financieros complejos, análisis de mercado y documentos de cumplimiento, ahorrando tiempo y recursos significativos para las instituciones financieras." },
+            { "title": "Análisis de Riesgos Crediticios", "description": "Evaluar la solvencia de los solicitantes de crédito de manera más rápida y precisa utilizando modelos de IA que analizan una amplia gama de datos." },
+            { "title": "Automatización de Procesos KYC", "description": "Agilizar los procesos de 'Conozca a su Cliente' (KYC) mediante la extracción y verificación automatizada de información de documentos." }
+        ]
+    },
+    {
+        "name": "Manufactura",
+        "id": "manufactura",
+        "examples": [
+            { "title": "Mantenimiento Predictivo", "description": "Anticipar fallos de equipos analizando datos de sensores y métricas de producción, lo que permite un mantenimiento proactivo, reduce el tiempo de inactividad y extiende la vida útil de los activos." },
+            { "title": "Diseño Generativo de Piezas", "description": "La IA diseña autónomamente componentes y productos optimizados basándose en parámetros específicos (ej., fuerza, peso, costo), lo que lleva a diseños innovadores y más eficientes." },
+            { "title": "Optimización de la Cadena de Suministro", "description": "Mejorar la logística, la gestión de inventario y la previsión de la demanda analizando grandes conjuntos de datos, lo que conduce a cadenas de suministro más eficientes, resilientes y rentables." },
+            { "title": "Control de Calidad Automatizado", "description": "Utilizar visión por computadora e IA para inspeccionar productos en la línea de producción, identificando defectos con mayor rapidez y precisión que la inspección manual." },
+            { "title": "Planificación de la Producción Asistida por IA", "description": "Optimizar los horarios de producción y la asignación de recursos para cumplir con los objetivos de producción de manera más eficiente." }
+        ]
+    },
+    {
+        "name": "Medios y Entretenimiento",
+        "id": "medios",
+        "examples": [
+            { "title": "Creación de Contenido Automatizada", "description": "Generar guiones, tramas, música o incluso videoclips cortos usando IA Generativa, acelerando la producción de contenido y habilitando nuevas formas de medios." },
+            { "title": "Curación de Contenido Personalizada", "description": "La IA recomienda películas, música o artículos basándose en las preferencias del usuario y el historial de visualización, mejorando el compromiso y el descubrimiento del usuario." },
+            { "title": "Producción de Medios Sintéticos", "description": "Crear humanos digitales realistas, voces en off o entornos virtuales para películas, juegos y publicidad, abriendo nuevas posibilidades creativas." },
+            { "title": "Análisis de Sentimiento de Audiencia", "description": "Analizar grandes volúmenes de comentarios de usuarios y redes sociales para comprender el sentimiento de la audiencia hacia el contenido y los artistas." },
+            { "title": "Generación de Efectos Visuales", "description": "Crear o mejorar efectos visuales complejos para películas y videojuegos de manera más rápida y económica utilizando técnicas de IA Generativa." }
+        ]
+    },
+    {
+        "name": "TI e Ingeniería",
+        "id": "ti-ingenieria",
+        "examples": [
+            { "title": "Generación y Completado de Código", "description": "La IA asiste a los desarrolladores generando fragmentos de código, completando funciones y sugiriendo mejoras, acelerando significativamente el proceso de desarrollo." },
+            { "title": "Pruebas y Depuración Automatizadas", "description": "Usar IA Generativa para crear casos de prueba, identificar errores e incluso sugerir correcciones en el software, lo que lleva a aplicaciones de mayor calidad y más confiables." },
+            { "title": "Monitoreo de Sistemas y Detección de Anomalías", "description": "La IA analiza registros del sistema y datos de rendimiento para identificar proactivamente patrones inusuales o posibles problemas, previniendo interrupciones y mejorando la estabilidad del sistema." },
+            { "title": "Automatización de Operaciones de TI (AIOps)", "description": "Aplicar IA para automatizar y mejorar las operaciones de TI, incluyendo la gestión de incidentes, la gestión del rendimiento y la automatización de tareas repetitivas." },
+            { "title": "Optimización de Infraestructura Cloud", "description": "Utilizar IA para optimizar el uso de recursos en la nube, reducir costos y mejorar el rendimiento de las aplicaciones y servicios." }
+        ]
+    },
+    {
+        "name": "Educación",
+        "id": "educacion",
+        "examples": [
+            { "title": "Rutas de Aprendizaje Personalizadas", "description": "La IA adapta el contenido educativo y el ritmo a las necesidades individuales de los estudiantes y estilos de aprendizaje, optimizando el compromiso y la retención de conocimientos." },
+            { "title": "Calificación y Retroalimentación Automatizadas", "description": "La IA Generativa proporciona retroalimentación instantánea sobre las tareas e incluso califica ciertos tipos de trabajo, permitiendo a los educadores centrarse en tareas de enseñanza más complejas." },
+            { "title": "Generación de Contenido para Cursos", "description": "Crear notas de clase, cuestionarios e incluso simulaciones interactivas basadas en los requisitos del plan de estudio, ahorrando tiempo a los desarrolladores de contenido." },
+            { "title": "Tutoría Virtual Inteligente", "description": "Ofrecer soporte de tutoría individualizado y adaptativo a los estudiantes, respondiendo preguntas y guiándolos a través de conceptos difíciles." },
+            { "title": "Análisis del Rendimiento Estudiantil", "description": "Identificar patrones en el rendimiento de los estudiantes para predecir riesgos de abandono o áreas donde se necesita apoyo adicional." }
+        ]
+    },
+    {
+        "name": "Recursos Humanos",
+        "id": "rrhh",
+        "examples": [
+            { "title": "Reclutamiento y Selección Inteligente", "description": "La IA analiza currículums y perfiles para identificar a los candidatos más adecuados, agilizando el proceso de contratación y reduciendo sesgos." },
+            { "title": "Onboarding Personalizado", "description": "Crear experiencias de incorporación personalizadas para nuevos empleados, proporcionando información relevante y tareas a medida." },
+            { "title": "Análisis de Sentimiento de Empleados", "description": "Analizar encuestas y comunicaciones internas para comprender el estado de ánimo de la fuerza laboral y abordar problemas de manera proactiva." }
+        ]
+    },
+    {
+        "name": "Legal",
+        "id": "legal",
+        "examples": [
+            { "title": "Análisis de Documentos Legales", "description": "La IA revisa y resume rápidamente grandes volúmenes de documentos legales, identificando cláusulas clave y precedentes relevantes." },
+            { "title": "Asistencia en Redacción de Contratos", "description": "Generar borradores de contratos y acuerdos legales basados en parámetros específicos, asegurando la coherencia y el cumplimiento." },
+            { "title": "Investigación Legal Automatizada", "description": "Realizar búsquedas exhaustivas en bases de datos legales y jurisprudencia, proporcionando a los abogados información relevante de manera eficiente." }
+        ]
+    }
+]

@@ -131,4 +131,263 @@
         }
 
         .example-item span {
-            font-size: 0.95
+            font-size: 0.95em;
+            color: #666;
+        }
+
+        /* Example details section */
+        #example-details {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #e8f3f8;
+            border-left: 6px solid #3498db; /* Thicker border */
+            border-radius: 10px; /* More rounded */
+            display: none; /* Hidden by default */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Shadow */
+            width: 100%; /* Take full width of container */
+            box-sizing: border-box;
+        }
+
+        #example-details.visible {
+            display: block;
+            animation: fadeIn 0.5s forwards; /* Fade in animation */
+        }
+
+        #example-details h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c0d9e8;
+            padding-bottom: 10px;
+        }
+
+        #example-details h4 {
+            color: #34495e;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        #example-details p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Loading indicator */
+        .loader {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+            margin: 50px auto;
+            display: none; /* Hidden by default */
+        }
+
+        .loader.visible {
+            display: block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            #mindmap-container {
+                padding: 20px;
+                border-radius: 10px;
+            }
+            .industry-node {
+                font-size: 1.2em;
+                padding: 10px 15px;
+                border-radius: 6px;
+            }
+            .examples-list {
+                margin-left: 20px;
+            }
+            .example-item {
+                font-size: 1em;
+                padding: 8px 12px;
+            }
+            #example-details {
+                padding: 15px;
+                margin-top: 30px;
+            }
+            #example-details h4 {
+                font-size: 1.1em;
+            }
+            #example-details p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Casos de Uso de IA Generativa por Industria - IAEcuador.com</h1>
+
+    <div id="mindmap-container">
+        <div id="loading-indicator" class="loader"></div>
+        <div id="industries-list">
+            <!-- Las industrias se cargarán aquí mediante JavaScript -->
+        </div>
+
+        <div id="example-details">
+            <h3>Detalles del Ejemplo Seleccionado:</h3>
+            <h4 id="detail-title"></h4>
+            <p id="detail-description"></p>
+        </div>
+    </div>
+
+    <script>
+        // --- Data for your Mind Map (Initially empty, will be loaded dynamically) ---
+        let industryData = []; // Este array se llenará con la función fetchData
+
+        // --- JavaScript for Mind Map Functionality ---
+        const industriesList = document.getElementById('industries-list');
+        const detailSection = document.getElementById('example-details');
+        const detailTitle = document.getElementById('detail-title');
+        const detailDescription = document.getElementById('detail-description');
+        const loadingIndicator = document.getElementById('loading-indicator');
+
+        /**
+         * Fetches data from the external JSON file.
+         * This function replaces the simulated data loading.
+         */
+        async function fetchData() {
+            loadingIndicator.classList.add('visible'); // Muestra el indicador de carga
+            industriesList.innerHTML = ''; // Limpia el contenido previo
+
+            try {
+                // Realiza la llamada para obtener los datos desde tu archivo JSON
+                // Asegúrate de que la ruta 'casos_de_uso.json' sea correcta.
+                // Si lo subiste a una subcarpeta 'data', sería 'data/casos_de_uso.json'
+                const response = await fetch('casos_de_uso.json'); 
+                if (!response.ok) {
+                    throw new Error(`Error HTTP! estado: ${response.status}`);
+                }
+                const fetchedData = await response.json();
+                industryData = fetchedData; // Asigna los datos cargados a la variable global
+                renderMindMapContent(); // Renderiza el contenido una vez que los datos estén cargados
+            } catch (error) {
+                console.error("Error al cargar los datos:", error);
+                industriesList.innerHTML = '<p style="text-align: center; color: red; padding: 20px;">Error al cargar los casos de estudio. Por favor, asegúrate de que el archivo "casos_de_uso.json" esté en la misma ubicación que "index.html" y que su formato sea correcto.</p>';
+            } finally {
+                loadingIndicator.classList.remove('visible'); // Oculta el indicador de carga
+            }
+        }
+
+        /**
+         * Renders the mind map by populating the industries list
+         * with data from the `industryData` array.
+         * This function is called after data is fetched.
+         */
+        function renderMindMapContent() {
+            industriesList.innerHTML = ''; // Limpia cualquier contenido existente
+
+            // Itera sobre cada industria en los datos
+            industryData.forEach(industry => {
+                // Crea el contenedor principal para un nodo de industria y sus ejemplos
+                const industryDiv = document.createElement('div');
+                industryDiv.classList.add('mindmap-node');
+
+                // Crea el nodo de título de industria clickeable
+                const industryNode = document.createElement('div');
+                industryNode.classList.add('industry-node');
+                industryNode.setAttribute('data-industry-id', industry.id);
+                // Agrega un icono de alternancia y el nombre de la industria
+                industryNode.innerHTML = `<span class="toggle-icon">></span> ${industry.name}`;
+
+                // Crea la lista desordenada para contener los ejemplos
+                const examplesList = document.createElement('ul');
+                examplesList.classList.add('examples-list');
+                examplesList.setAttribute('id', `examples-${industry.id}`);
+
+                // Llena la lista de ejemplos para la industria actual
+                industry.examples.forEach(example => {
+                    const exampleItem = document.createElement('li');
+                    exampleItem.classList.add('example-item');
+                    // Muestra el título y un breve fragmento de la descripción
+                    exampleItem.innerHTML = `
+                        <strong>${example.title}</strong>
+                        <span>${example.description.substring(0, 100)}${example.description.length > 100 ? '...' : ''}</span>
+                    `;
+                    // Agrega un escuchador de eventos para mostrar los detalles completos cuando se hace clic en un ejemplo
+                    exampleItem.addEventListener('click', (event) => {
+                        event.stopPropagation(); // Evita que se alterne la industria al hacer clic en el ejemplo
+                        showExampleDetails(example);
+                    });
+                    examplesList.appendChild(exampleItem);
+                });
+
+                // Agrega un escuchador de eventos al título de la industria para alternar la visibilidad de los ejemplos
+                industryNode.addEventListener('click', () => toggleIndustry(industryNode, examplesList));
+
+                // Agrega el nodo de la industria y su lista de ejemplos al contenedor principal de industrias
+                industryDiv.appendChild(industryNode);
+                industryDiv.appendChild(examplesList);
+                industriesList.appendChild(industryDiv);
+            });
+        }
+
+        /**
+         * Toggles the visibility of an industry's examples list.
+         * @param {HTMLElement} industryNode - El elemento del título de la industria clickeado.
+         * @param {HTMLElement} examplesList - El elemento de la lista de ejemplos a alternar.
+         */
+        function toggleIndustry(industryNode, examplesList) {
+            industryNode.classList.toggle('expanded');
+            examplesList.classList.toggle('expanded');
+            
+            // Establece la altura máxima para una transición suave. Si está expandida, se establece en scrollHeight
+            // (o un valor fijo generoso si scrollHeight no es inmediatamente preciso).
+            // Si está colapsada, se establece en 0.
+            if (examplesList.classList.contains('expanded')) {
+                // Un ligero retraso o un valor fijo generoso puede ayudar si el contenido se carga dinámicamente
+                examplesList.style.maxHeight = examplesList.scrollHeight + "px";
+                if (examplesList.scrollHeight === 0) { // Fallback para listas vacías o muy cortas
+                    examplesList.style.maxHeight = "200px"; // Asegura alguna altura incluso si está vacía inicialmente
+                }
+            } else {
+                examplesList.style.maxHeight = "0";
+            }
+            hideExampleDetails(); // Oculta los detalles cuando una industria se colapsa o se abre
+        }
+
+        /**
+         * Displays the full details of a selected example.
+         * @param {Object} example - El objeto de ejemplo que contiene el título y la descripción.
+         */
+        function showExampleDetails(example) {
+            detailTitle.textContent = example.title;
+            detailDescription.textContent = example.description;
+            detailSection.classList.add('visible');
+            // Desplaza la sección de detalles a la vista suavemente
+            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        /**
+         * Hides the example details section.
+         */
+        function hideExampleDetails() {
+            detailSection.classList.remove('visible');
+            detailTitle.textContent = '';
+            detailDescription.textContent = '';
+        }
+
+        // Inicializa el mapa mental obteniendo los datos cuando el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', fetchData);
+    </script>
+</body>
+</html>
